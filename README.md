@@ -3,7 +3,7 @@
   Made by Hector Manuel
 -->
 
-<h1 align="center">👑 QUEEN RIAM MD</h1>
+<h1 align="center">👑 QUEEN RIAM </h1>
 
 <p align="center">
   <img src="https://i.imgur.com/6H0FXSa.jpeg" alt="Queen Riam Banner" width="350" />
@@ -26,7 +26,7 @@
 
 ## 📝 About
 
-**QUEEN RIAM MD** is a modern WhatsApp multi-device bot built with Node.js, Baileys, and Express. It is designed for ease of use, extensibility, and robust automation for group and personal chats. Please use this tool responsibly and for educational purposes only.
+**QUEEN RIAM** is a modern WhatsApp multi-device bot built with Node.js, Baileys, and Express. It is designed for ease of use, extensibility, and robust automation for group and personal chats. Please use this tool responsibly and for educational purposes only.
 
 ---
 
@@ -47,7 +47,7 @@ Generate your Session ID to connect your WhatsApp account:
 
 ## 🚀 Deploy Instantly
 
-Deploy QUEEN RIAM MD with one click on any platform below:
+Deploy QUEEN RIAM with one click on any platform below:
 
 <table align="center">
   <tr>
