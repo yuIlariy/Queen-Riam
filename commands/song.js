@@ -8,7 +8,7 @@ async function songCommand(sock, chatId, message) {
         
         if (!searchQuery) {
             return await sock.sendMessage(chatId, { 
-                text: "❌ Please provide a song name!\nExample: `.song despacito`"
+                text: "❌ Please provide a song name!\nExample: `.play Lilly Alan Walker`"
             }, { quoted: message });
         }
 
@@ -26,9 +26,9 @@ async function songCommand(sock, chatId, message) {
 
         // Send video info before download
         await sock.sendMessage(chatId, {
-            image: { url: result.result.thumbnail },
-            caption: `🎵 *${result.result.title}*\n\n𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜... 🎶\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ǫᴜᴇᴇɴ ʀɪᴀᴍ`
-        }, { quoted: message });
+    image: { url: video.thumbnail },
+    caption: `🎵 *${video.title}*\n\n𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜... 🎶\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ǫᴜᴇᴇɴ ʀɪᴀᴍ`
+}, { quoted: message });
 
         // Call the new API with ?url= style
         const apiUrl = `https://yt-dl.officialhectormanuel.workers.dev/?url=${encodeURIComponent(videoUrl)}`;
