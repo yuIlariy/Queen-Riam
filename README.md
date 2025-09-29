@@ -82,5 +82,3 @@
 - Do not use it for spamming or illegal activities.  
 
 > `POWERED BY HECTOR MANUEL ✨`
-
----
