@@ -98,3 +98,32 @@ Deploy QUEEN RIAM MD with one click on any platform below:
 ---
 
 ## ⚡ Quick Start
+
+
+
+---
+
+## ❤️ Credits
+
+- [DevKango](https://github.com/Dev-Kango)
+- [OfficialKango](https://github.com/OfficialKango)
+- [Baileys](https://github.com/WhiskeySockets)
+
+<p align="center">🇬🇭 Made with ❤️ in Ghana</p>
+
+---
+
+## ⚠️ Notice
+
+- **Educational use only.**
+- Do **not** use this bot for spam or any illegal activities.
+
+> Powered by Hector Manuel ✨
+
+---
+
+<p align="center">
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F94E8B&lines=WELCOME+TO+QUEEN+RIAM+MD;MADE+BY+HECTOR+MANUEL;THANKS+FOR+VISITING+MY+REPO" alt="Typing SVG" />
+  </a>
+</p>
