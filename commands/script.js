@@ -5,7 +5,7 @@ async function scriptCommand(sock, chatId, message) {
         // React loading
         await sock.sendMessage(chatId, { react: { text: '🔄', key: message.key } });
 
-        const repoUrl = "https://github.com/Dev-Kango/Queen-Riam-";
+        const repoUrl = "https://github.com/Dev-Kango/Queen-Riam";
         const zipUrl = `${repoUrl}/archive/refs/heads/main.zip`;
 
         // Fetch repo details
@@ -17,7 +17,7 @@ async function scriptCommand(sock, chatId, message) {
         });
 
         const caption =
-            `*👑QUEEN RIAM Repository*\n\n` +
+            `*👑 QUEEN RIAM Repository*\n\n` +
             `🔗 *Repository URL:* ${repoUrl}\n` +
             `📂 *Branch:* main\n` +
             `📦 *File:* Queen-Riam-main.zip\n\n` +
@@ -27,7 +27,7 @@ async function scriptCommand(sock, chatId, message) {
             `✨ The ZIP file contains the full repository source code.\n\n` +
             `💡 Tip: Fork it, star it, and hack your own version!`;
 
-        // Send preview
+        // Send preview card
         await sock.sendMessage(chatId, {
             text: caption,
             contextInfo: {
@@ -41,10 +41,11 @@ async function scriptCommand(sock, chatId, message) {
             }
         }, { quoted: message });
 
-        // Fetch and send ZIP
+        // Fetch and send ZIP (convert to Buffer explicitly)
         const { data: zipBuffer } = await axios.get(zipUrl, { responseType: "arraybuffer" });
+
         await sock.sendMessage(chatId, {
-            document: zipBuffer,
+            document: Buffer.from(zipBuffer),
             fileName: "Queen-Riam-main.zip",
             mimetype: "application/zip"
         }, { quoted: message });
