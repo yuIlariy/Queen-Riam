@@ -7,17 +7,28 @@ async function songCommand(sock, chatId, message) {
         const searchQuery = text.split(' ').slice(1).join(' ').trim();
         
         if (!searchQuery) {
-            return await sock.sendMessage(chatId, { 
+            await sock.sendMessage(chatId, { 
                 text: "❌ Please provide a song name!\nExample: `.play Lilly Alan Walker`"
             }, { quoted: message });
+
+            // React ❌ when no query
+            await sock.sendMessage(chatId, { react: { text: "❌", key: message.key }});
+            return;
         }
+
+        // React 🔎 while searching
+        await sock.sendMessage(chatId, { react: { text: "🔎", key: message.key }});
 
         // Search YouTube
         const { videos } = await yts(searchQuery);
         if (!videos || videos.length === 0) {
-            return await sock.sendMessage(chatId, { 
+            await sock.sendMessage(chatId, { 
                 text: "⚠️ No results found for your query!"
             }, { quoted: message });
+
+            // React ⚠️ when no results
+            await sock.sendMessage(chatId, { react: { text: "⚠️", key: message.key }});
+            return;
         }
 
         // Use first video
@@ -26,9 +37,12 @@ async function songCommand(sock, chatId, message) {
 
         // Send video info before download
         await sock.sendMessage(chatId, {
-    image: { url: video.thumbnail },
-    caption: `🎵 *${video.title}*\n\n𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜... 🎶\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ǫᴜᴇᴇɴ ʀɪᴀᴍ`
-}, { quoted: message });
+            image: { url: video.thumbnail },
+            caption: `🎵 *${video.title}*\n\n𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜... 🎶\n\n> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ǫᴜᴇᴇɴ ʀɪᴀᴍ`
+        }, { quoted: message });
+
+        // React ⏳ while downloading
+        await sock.sendMessage(chatId, { react: { text: "⏳", key: message.key }});
 
         // Call the new API with ?url= style
         const apiUrl = `https://yt-dl.officialhectormanuel.workers.dev/?url=${encodeURIComponent(videoUrl)}`;
@@ -36,20 +50,26 @@ async function songCommand(sock, chatId, message) {
         const data = response.data;
 
         if (!data?.status) {
-            // The API did not return a “status: true” or valid data
-            return await sock.sendMessage(chatId, {
+            await sock.sendMessage(chatId, {
                 text: "🚫 Failed to fetch from new endpoint. Try again later."
             }, { quoted: message });
+
+            // React 🚫 if API fails
+            await sock.sendMessage(chatId, { react: { text: "🚫", key: message.key }});
+            return;
         }
 
-        // The API returns fields: title, thumbnail, audio, videos, etc.
         const audioUrl = data.audio;
         const title = data.title || video.title;
 
         if (!audioUrl) {
-            return await sock.sendMessage(chatId, {
+            await sock.sendMessage(chatId, {
                 text: "🚫 No audio URL in the response. Can't send audio."
             }, { quoted: message });
+
+            // React ❌ if audio not found
+            await sock.sendMessage(chatId, { react: { text: "❌", key: message.key }});
+            return;
         }
 
         // Send the audio file
@@ -59,11 +79,17 @@ async function songCommand(sock, chatId, message) {
             fileName: `${title}.mp3`
         }, { quoted: message });
 
+        // React ✅ on success
+        await sock.sendMessage(chatId, { react: { text: "✅", key: message.key }});
+
     } catch (error) {
-        console.error('Error in playCommand:', error);
+        console.error('Error in songCommand:', error);
         await sock.sendMessage(chatId, {
             text: "❌ Download failed. Please try again later."
         }, { quoted: message });
+
+        // React ❌ on error
+        await sock.sendMessage(chatId, { react: { text: "❌", key: message.key }});
     }
 }
 
